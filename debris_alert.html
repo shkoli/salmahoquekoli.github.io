@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Space Debris Alert</title>
+  <style>
+    body { font-family: Arial; text-align: center; background: #0a0a23; color: #fff; padding: 50px; }
+    h2 { color: #00ff88; }
+    .alert { font-size: 24px; padding: 20px; border-radius: 15px; margin: 20px; }
+    .safe { background: #004400; }
+    .danger { background: #440000; animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: 0.5; } }
+    .btn { padding: 15px 30px; background: #00ff88; color: black; text-decoration: none; border-radius: 50px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>🚀 Space Debris Alert System</h2>
+  <p>Real-time monitoring near ISS</p>
+  <div id="alert" class="alert">Checking...</div>
+  <p><a href="index.html" class="btn">← Back to Home</a></p>
+
+  <script>
+    function checkDebris() {
+      // Simulation: 10% chance of debris
+      const distance = Math.random() * 100;
+      const alertDiv = document.getElementById('alert');
+      if (distance < 10) {
+        alertDiv.className = 'alert danger';
+        alertDiv.innerHTML = '⚠️ DEBRIS ALERT!<br>Distance: ' + distance.toFixed(2) + ' km';
+      } else {
+        alertDiv.className = 'alert safe';
+        alertDiv.innerHTML = '✅ Safe Zone<br>Distance: ' + distance.toFixed(2) + ' km';
+      }
+    }
+    checkDebris();
+    setInterval(checkDebris, 5000); // Update every 5 sec
+  </script>
+</body>
+</html>
