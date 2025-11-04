@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Asteroid Predictor</title>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/controls/OrbitControls.js"></script>
+  <style> body { margin: 0; background:#000; } #info { position:absolute; top:20px; left:20px; color:#0f0; font-family:Arial; z-index:100; background:rgba(0,0,0,0.5); padding:15px; border-radius:10px; } </style>
+</head>
+<body>
+  <div id="info">
+    <h2>AI Asteroid Collision Risk</h2>
+    <p id="risk">Calculating...</p>
+  </div>
+  <script>
+    const scene = new THREE.Scene(); scene.background = new THREE.Color(0x000022);
+    const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer(); renderer.setSize(innerWidth, innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Earth
+    const earth = new THREE.Mesh(
+      new THREE.SphereGeometry(4, 64, 64),
+      new THREE.MeshBasicMaterial({color:0x2244ff})
+    );
+    scene.add(earth);
+
+    // Asteroid
+    const asteroid = new THREE.Mesh(
+      new THREE.SphereGeometry(0.6, 32, 32),
+      new THREE.MeshBasicMaterial({color:0xff3300})
+    );
+    asteroid.position.set(12, 0, 0);
+    scene.add(asteroid);
+
+    camera.position.z = 18;
+
+    // AI Prediction
+    setTimeout(() => {
+      const risky = Math.random() < 0.12;
+      document.getElementById('risk').innerHTML = risky ? 
+        "⚠️ HIGH RISK!<br>Collision probability: 12%" : 
+        "✅ SAFE ZONE<br>No threat detected";
+      asteroid.material.color.set(risky ? 0xff0000 : 0x00ff00);
+    }, 3000);
+
+    // Animation
+    function animate() {
+      requestAnimationFrame(animate);
+      asteroid.position.x -= 0.06;
+      if (asteroid.position.x < -8) asteroid.position.x = 15;
+      earth.rotation.y += 0.002;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.onresize = () => {
+      camera.aspect = innerWidth/innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    };
+  </script>
+</body>
+</html>
