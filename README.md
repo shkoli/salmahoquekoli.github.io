@@ -1,4 +1,4 @@
-![Salma Hoque Koli - Space Engineer](https://i.imgur.com/YOUR-IMG-LINK.jpg)
+![Salma Hoque Koli - Space Engineer](https://i.imgur.com/mYu4iwT.jpg)
 
 # Salma Hoque Koli  
 **CSE → Space Engineering** | Motion Graphics + AI + NASA Data  
